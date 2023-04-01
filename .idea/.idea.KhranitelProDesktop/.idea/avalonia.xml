@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="KhranitelProDesktop/App.axaml" value="KhranitelProDesktop/KhranitelProDesktop.csproj" />
+        <entry key="KhranitelProDesktop/MainWindow.axaml" value="KhranitelProDesktop/KhranitelProDesktop.csproj" />
+        <entry key="KhranitelProDesktop/Pages/Auth.axaml" value="KhranitelProDesktop/KhranitelProDesktop.csproj" />
+        <entry key="KhranitelProDesktop/Pages/MainMenu.axaml" value="KhranitelProDesktop/KhranitelProDesktop.csproj" />
+        <entry key="KhranitelProDesktop/Pages/Registration.axaml" value="KhranitelProDesktop/KhranitelProDesktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
