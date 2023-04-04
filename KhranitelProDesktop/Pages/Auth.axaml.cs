@@ -37,7 +37,7 @@ public partial class Auth : UserControl
 
             if (BCrypt.Net.BCrypt.Verify(PasswordTbx.Text, user.Password))
             {
-                Navigationn.Content = new MainMenu();
+                Navigationn.Content = new MainMenu(user.Id);
             }
             
         }

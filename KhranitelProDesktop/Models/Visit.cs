@@ -9,9 +9,9 @@ public partial class Visit
 
     public int Userid { get; set; }
 
-    public DateOnly Startdate { get; set; }
+    public DateTime Startdate { get; set; }
 
-    public DateOnly Enddate { get; set; }
+    public DateTime Enddate { get; set; }
 
     public int Targetid { get; set; }
 
@@ -23,9 +23,11 @@ public partial class Visit
 
     public string? Statusreason { get; set; }
 
-    public DateOnly? Visitdate { get; set; }
+    public DateTime? Visitdate { get; set; }
 
     public string? Groupname { get; set; }
+
+    public TimeOnly? Time { get; set; }
 
     public virtual Employee Employee { get; set; } = null!;
 

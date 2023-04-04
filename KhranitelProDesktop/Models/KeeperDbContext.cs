@@ -111,11 +111,15 @@ public partial class KeeperDbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Employeeid).HasColumnName("employeeid");
-            entity.Property(e => e.Enddate).HasColumnName("enddate");
+            entity.Property(e => e.Enddate)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("enddate");
             entity.Property(e => e.Groupname)
                 .HasMaxLength(50)
                 .HasColumnName("groupname");
-            entity.Property(e => e.Startdate).HasColumnName("startdate");
+            entity.Property(e => e.Startdate)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("startdate");
             entity.Property(e => e.Statusid).HasColumnName("statusid");
             entity.Property(e => e.Statusreason)
                 .HasMaxLength(50)
@@ -123,7 +127,9 @@ public partial class KeeperDbContext : DbContext
             entity.Property(e => e.Targetid).HasColumnName("targetid");
             entity.Property(e => e.Typeid).HasColumnName("typeid");
             entity.Property(e => e.Userid).HasColumnName("userid");
-            entity.Property(e => e.Visitdate).HasColumnName("visitdate");
+            entity.Property(e => e.Visitdate)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("visitdate");
 
             entity.HasOne(d => d.Employee).WithMany(p => p.Visits)
                 .HasForeignKey(d => d.Employeeid)
@@ -158,7 +164,9 @@ public partial class KeeperDbContext : DbContext
             entity.ToTable("visitor");
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Birthdate).HasColumnName("birthdate");
+            entity.Property(e => e.Birthdate)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("birthdate");
             entity.Property(e => e.Email)
                 .HasMaxLength(50)
                 .HasColumnName("email");
