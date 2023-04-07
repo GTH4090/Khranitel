@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,7 @@ using Avalonia.Controls;
 using Avalonia.Dialogs;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media.Imaging;
 using Avalonia.Skia;
 using KhranitelProDesktop.Models;
 using MessageBox.Avalonia;
@@ -75,6 +77,10 @@ public partial class RequestPage : UserControl
     {
         OpenFileDialog file = new OpenFileDialog();
         file.AllowMultiple = false;
+        file.Filters = new List<FileDialogFilter>()
+        {
+            new FileDialogFilter(){Name = "Pdf", Extensions = new List<string>(){"pdf"}}
+        };
         var res = await file.ShowAsync(Win);
         if (res.Count() != 0)
         {
@@ -90,11 +96,27 @@ public partial class RequestPage : UserControl
     {
         OpenFileDialog file = new OpenFileDialog();
         file.AllowMultiple = false;
+        file.Filters = new List<FileDialogFilter>()
+        {
+            new FileDialogFilter(){Name = "Jpg", Extensions = new List<string>(){"jpg"}}
+        };
         var res = await file.ShowAsync(Win);
         if (res.Count() != 0)
         {
-            (VisitorGrid.DataContext as Visitor).Photo = File.ReadAllBytes(res[0]);
+            MemoryStream stream = new MemoryStream(File.ReadAllBytes(res[0]));
+            Bitmap bit = new Bitmap(stream);
+            if (bit.Size.Width * 3 == bit.Size.Height * 4 && stream.Length <= 4 * 1024 * 1024)
+            {
+                (VisitorGrid.DataContext as Visitor).Photo = File.ReadAllBytes(res[0]);
+            }
+            
+            
+            
+            UserImg.Source = bit;
+            
+
         }
+        
     }
 
     private void OkBtn_OnClick(object? sender, RoutedEventArgs e)

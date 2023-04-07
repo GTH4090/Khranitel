@@ -87,7 +87,7 @@
                 <MaskedTextBox Mask="000000" Grid.Row="4" Grid.Column="3" Text="{Binding Passportnumber}"/>
                 
                 <StackPanel Orientation="Vertical" Grid.RowSpan="7" Grid.Column="4">
-                    <Image Height="100" Source="/Images/User.jpg"/>
+                    <Image Height="100" Name="UserImg"/>
                     <Button Content="Добавить фото" Name="ImageBtn" Click="ImageBtn_OnClick" Background="White">
                         <Button.BorderBrush>
                             <SolidColorBrush Color="#FF6600"></SolidColorBrush>
