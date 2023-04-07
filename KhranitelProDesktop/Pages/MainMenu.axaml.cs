@@ -30,4 +30,9 @@ public partial class MainMenu : UserControl
     {
         Navigationn.Content = new RequestPage(_id);
     }
+
+    private void GroupOrdBtn_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Navigationn.Content = new GroupRequestPage(_id);
+    }
 }

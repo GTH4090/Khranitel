@@ -18,7 +18,10 @@
                 
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <Button Name="OrderBtn" Content="Подать личную заявку" Width="Nan" Click="OrderBtn_OnClick"/>
+            <Button Name="GroupOrdBtn" Content="Подать груп. заявку" Width="nan" Click="GroupOrdBtn_OnClick"/>
+        </StackPanel>
         
-        <Button Name="OrderBtn" Content="Подать заявку" Grid.Row="1" Click="OrderBtn_OnClick"/>
     </Grid>
 </UserControl>

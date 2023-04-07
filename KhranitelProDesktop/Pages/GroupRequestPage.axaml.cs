@@ -1,16 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Net;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Dialogs;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media.Imaging;
-using Avalonia.Skia;
 using KhranitelProDesktop.Models;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
@@ -18,8 +13,37 @@ using static KhranitelProDesktop.Classes.Helper;
 
 namespace KhranitelProDesktop.Pages;
 
-public partial class RequestPage : UserControl
+public partial class GroupRequestPage : UserControl
 {
+    private int _id = 0;
+    public GroupRequestPage(int id)
+    {
+        _id = id;
+        InitializeComponent();
+        LoadCbx();
+        Visit visit = new Visit();
+        Visitor visitor = new Visitor();
+        VisitGrid.DataContext = visit;
+        VisitorGrid.DataContext = visitor;
+        DivisionCbx.SelectedIndex = 0;
+        TargetCbx.SelectedIndex = 0;
+        FromDp.SelectedDate = DateTime.Now.AddDays(1);
+        ToDp.SelectedDate = DateTime.Now.AddDays(1);
+        BirthDp.SelectedDate = DateTime.Now.AddYears(-16);
+        
+        if (id != -1)
+        {
+            (VisitGrid.DataContext as Visit).Userid = id;
+        }
+        (VisitGrid.DataContext as Visit).Typeid = 2;
+        (VisitGrid.DataContext as Visit).Statusid = 1;
+    }
+
+    public GroupRequestPage()
+    {
+        
+    }
+
     private void LoadCbx()
     {
         TargetCbx.Items = Db.Visittargets.ToList();
@@ -34,36 +58,10 @@ public partial class RequestPage : UserControl
         BirthDp.DisplayDateEnd = DateTime.Now.AddYears(-16);
     }
 
-    private int _id;
-    public RequestPage(int id)
+    private void FromDp_OnSelectedDateChanged(object? sender, SelectionChangedEventArgs e)
     {
-        _id = id;
-        InitializeComponent();
-        LoadCbx();
-
-        Visit visit = new Visit();
-        Visitor visitor = new Visitor();
-        VisitGrid.DataContext = visit;
-        VisitorGrid.DataContext = visitor;
-        DivisionCbx.SelectedIndex = 0;
-        TargetCbx.SelectedIndex = 0;
-        FromDp.SelectedDate = DateTime.Now.AddDays(1);
-        ToDp.SelectedDate = DateTime.Now.AddDays(1);
-        BirthDp.SelectedDate = DateTime.Now.AddYears(-16);
-        if (id != -1)
-        {
-            (VisitGrid.DataContext as Visit).Userid = id;
-        }
-        
-        (VisitGrid.DataContext as Visit).Typeid = 1;
-        (VisitGrid.DataContext as Visit).Statusid = 1;
+        ToDp.DisplayDateStart = FromDp.SelectedDate;
     }
-
-    public RequestPage()
-    {
-        
-    }
-
 
     private void DivisionCbx_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
@@ -72,12 +70,9 @@ public partial class RequestPage : UserControl
         NameCbx.SelectedIndex = 0;
     }
 
-    private void FromDp_OnSelectedDateChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        ToDp.DisplayDateStart = FromDp.SelectedDate;
-    }
+    
 
-    private async void  DocsBtn_OnClick(object? sender, RoutedEventArgs e)
+    private async void DocsBtn_OnClick(object? sender, RoutedEventArgs e)
     {
         OpenFileDialog file = new OpenFileDialog();
         file.AllowMultiple = false;
@@ -90,37 +85,7 @@ public partial class RequestPage : UserControl
         {
             (VisitorGrid.DataContext as Visitor).Passportscan = File.ReadAllBytes(res[0]);
         }
-        
 
-
-
-    }
-
-    private async void ImageBtn_OnClick(object? sender, RoutedEventArgs e)
-    {
-        OpenFileDialog file = new OpenFileDialog();
-        file.AllowMultiple = false;
-        file.Filters = new List<FileDialogFilter>()
-        {
-            new FileDialogFilter(){Name = "Jpg", Extensions = new List<string>(){"jpg"}}
-        };
-        var res = await file.ShowAsync(Win);
-        if (res.Count() != 0)
-        {
-            MemoryStream stream = new MemoryStream(File.ReadAllBytes(res[0]));
-            Bitmap bit = new Bitmap(stream);
-            if (bit.Size.Width * 3 == bit.Size.Height * 4 && stream.Length <= 4 * 1024 * 1024)
-            {
-                (VisitorGrid.DataContext as Visitor).Photo = File.ReadAllBytes(res[0]);
-            }
-            
-            
-            
-            UserImg.Source = bit;
-            
-
-        }
-        
     }
 
     private void OkBtn_OnClick(object? sender, RoutedEventArgs e)

@@ -23,6 +23,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [/home/user/RiderProjects/KhranitelProDesktop/KhranitelProDesktop/Pages/Auth.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[/home/user/RiderProjects/KhranitelProDesktop/KhranitelProDesktop/Pages/GroupRequestPage.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/home/user/RiderProjects/KhranitelProDesktop/KhranitelProDesktop/Pages/MainMenu.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
